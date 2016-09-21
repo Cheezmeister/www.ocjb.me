@@ -1,1 +1,14 @@
 /* This file is for your main application css. */
+.center-children {
+  display: flex
+  justify-content: center
+  align-items: center
+}
+
+.track-info {
+  background: aliceblue
+}
+.track {
+  border: 1px solid gray
+  margin: 1px
+}

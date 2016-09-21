@@ -1,0 +1,12 @@
+<div class="track row" id="track-details-<%= @track.number %>">
+  <div class="col-lg-6 track-info">
+  <h5> <%= @track.title %> </h5>
+  <h6> <%= @track.artist %> </h6>
+  </div>
+  <div class="col-lg-3 ocr-link">
+  <span> <a href="<%= @track.ocrUrl %>" >On OC ReMix</a> </span>
+  </div>
+  <div class="col-lg-3 audio">
+    <span> <audio id="track-<%= @track.number %>" src="<%= @track.srcUrl %>"><%= @track.srcUrl %></audio> </span>
+  </div>
+</div>

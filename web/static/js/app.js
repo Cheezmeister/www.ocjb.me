@@ -19,3 +19,17 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+
+let trackCount = 2
+let trackNum = Math.ceil(Math.random() * trackCount)
+let nowPlaying = document.getElementById('nowplaying')
+
+playTrack(trackNum)
+
+function playTrack(trackNumber) {
+  let aud = document.getElementById(`track-${trackNum}`)
+  nowPlaying.src = aud.src
+  nowPlaying.play()
+}
+
+// console.log('Success')

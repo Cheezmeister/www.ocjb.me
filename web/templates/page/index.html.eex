@@ -1,6 +1,18 @@
-<div class="jumbotron">
+<div class="hide jumbotron">
   <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
+  <p class="lead">A schwifty web framework that<br />does not compromise speed and maintainability.</p>
+</div>
+
+<div class="center-children" style="width: 0">
+  <div class="wrapper">
+    <audio controls muted id="nowplaying" src=""></audio>
+  </div>
+</div>
+
+<div class="tracklist">
+  <%= for track <- @tracks do %>
+    <%= render "track.html", track: track %>
+  <% end %>
 </div>
 
 <div class="row marketing">
