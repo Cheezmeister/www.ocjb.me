@@ -9,7 +9,7 @@ defmodule Ocjb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/", from: :ocjb, gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt dummy.mp3)
+    only: ~w(css fonts images js favicon.ico robots.txt mp3)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

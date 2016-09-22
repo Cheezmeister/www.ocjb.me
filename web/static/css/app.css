@@ -1,14 +1,18 @@
 /* This file is for your main application css. */
-.center-children {
-  display: flex
-  justify-content: center
-  align-items: center
+body {
+  background: rgb(195, 142, 251) none repeat scroll 0% 0%;
+}
+
+.row.track {
+  border: 1px solid gray;
+  margin: 1px;
 }
 
 .track-info {
-  background: aliceblue
+  background: #ccffcc;
 }
-.track {
-  border: 1px solid gray
-  margin: 1px
+
+.row.track.nowplaying {
+  background: #ffffcc;
+  border: 1px solid blue;
 }

@@ -1,0 +1,14 @@
+div.track.row.well id="track-details-#{@track.number}"
+  .track-info.col-lg-6
+    h5= @track.title
+    h6= @track.artist
+  .ocr-link.col-lg-3
+    span
+      a href=@track.ocrUrl On OC ReMix
+  .audio.col-lg-1
+    span
+      audio id="track-#{@track.number}" src=@track.srcUrl
+  .download.col-lg-2
+    h5 Download
+    a href=@track.srcUrl BlueBlue.fr
+    
