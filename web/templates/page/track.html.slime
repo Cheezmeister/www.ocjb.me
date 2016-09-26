@@ -1,14 +1,12 @@
-div.track.row.well id="track-details-#{@track.number}"
-  .track-info.col-lg-6
-    h5= @track.title
-    h6= @track.artist
-  .ocr-link.col-lg-3
-    span
-      a href=@track.ocrUrl On OC ReMix
-  .audio.col-lg-1
-    span
-      audio id="track-#{@track.number}" src=@track.srcUrl
-  .download.col-lg-2
-    h5 Download
-    a href=@track.srcUrl BlueBlue.fr
+div.track.row.well id="track-details-#{@track.number}" data-title=@track.title
+  .track-info.col-sm-6 name="trackinfo"
+    h5.track-title= @track.title
+    h6.track-artist= @track.artist
+  .download.col-sm-6
+    a.hide href=@track.ocrUrl
+      span aria-title="On OC ReMix"
+        img src='/images/ocremix.org.ico'
+    a.pull-right id="dl-blueblue-#{@track.number}" href=@track.srcUrl
+      span aria-title="Download"
+        i.fa.fa-download aria-hidden="true" title="Download from BlueBlue.fr"
     

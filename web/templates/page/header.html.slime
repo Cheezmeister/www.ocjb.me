@@ -1,0 +1,9 @@
+.center-children
+  h4
+    | Now Playing:
+    span#track-title
+  .row
+    .col-sm-6
+      audio#nowplaying controls="controls" src=""
+    .controls.col-sm-6
+      i#fast-forward.btn.fa.fa-forward

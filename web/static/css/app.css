@@ -5,14 +5,12 @@ body {
 
 .row.track {
   border: 1px solid gray;
-  margin: 1px;
-}
-
-.track-info {
   background: #ccffcc;
 }
 
+.track-info {
+}
+
 .row.track.nowplaying {
-  background: #ffffcc;
-  border: 1px solid blue;
+  background: #fff0de;
 }

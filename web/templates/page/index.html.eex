@@ -3,13 +3,9 @@
   <p class="lead">A schwifty web framework that<br />does not compromise speed and maintainability.</p>
 </div>
 
-<div class="center-children" style="width: 0">
-  <div class="wrapper">
-    <audio controls muted id="nowplaying" src=""></audio>
-  </div>
-</div>
+<%= render "header.html", assigns %>
 
-<div class="tracklist">
+<div id="tracklist" class="tracklist">
   <%= for track <- @tracks do %>
     <%= render "track.html", track: track %>
   <% end %>

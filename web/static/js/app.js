@@ -23,11 +23,17 @@ import "phoenix_html"
 
 const CLASS_TRACK_DETAILS = 'track'
 const ID_NOW_PLAYING = 'nowplaying'
+const ID_FAST_FORWARD = 'fast-forward'
+const ID_TRACK_TITLE = 'track-title'
 
-let trackCount = 75
+let trackCount = document.getElementsByClassName(CLASS_TRACK_DETAILS).length
 let nowPlaying = document.getElementById(ID_NOW_PLAYING)
+let fastForwardButton = document.getElementById(ID_FAST_FORWARD)
+let nowPlayingSpan = document.getElementById(ID_TRACK_TITLE)
 
 nowPlaying.onended = playRandomTrack
+fastForwardButton.onclick = playRandomTrack
+nowPlaying.muted = window.location.search === '?quiet'
 playRandomTrack()
 
 function playRandomTrack() {
@@ -36,18 +42,22 @@ function playRandomTrack() {
 }
 
 function playTrack(trackNumber) {
-  let aud = document.getElementById(`track-${trackNumber}`)
-  nowPlaying.src = aud.src
+  // TODO Use all mirrors to fallback
+  let link = document.getElementById(`dl-blueblue-${trackNumber}`)
+  nowPlaying.src = link.href
   nowPlaying.play()
 
   let trackDetails = document.getElementsByClassName(CLASS_TRACK_DETAILS)
 
-  for (let idx = 0; idx < 75; idx++) {
-    var trackDetail = trackDetails[idx]
-    // trackDetail['class'] = 'track row'
+  for (let idx = 0; idx < trackCount; idx++) {
+    let trackDetail = trackDetails[idx]
     if (trackDetail.id == `track-details-${trackNumber}`) {
-      trackDetail.attributes['class'].value = 'track row nowplaying'
+      trackDetail.attributes['class'].value = 'track row well nowplaying'
+      nowPlayingSpan.innerHTML = trackDetail.dataset.title
+      document.title = trackDetail.dataset.title
       console.log(trackDetail)
+    } else {
+      trackDetail.attributes['class'].value = 'track row well'
     }
   }
 }
