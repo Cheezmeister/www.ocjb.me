@@ -1,10 +1,6 @@
 defmodule Ocjb.PageController do
   use Ocjb.Web, :controller
 
-  def init do
-    IO.puts 'it works'
-  end
-
   def index(conn, _params) do
     tracks = prep_track_data
     render conn, "index.html", tracks: tracks
@@ -12,9 +8,8 @@ defmodule Ocjb.PageController do
 
   def tags(conn, params) do
     filename = params["filename"]
-    file = File.read! "#{filename}.mp3"
+    file = File.read! "web/static/assets/mp3/#{filename}"
     frames = ID3v2.frames file
-    IO.puts "wat, #{inspect frames}"
     render conn, "tags.html", frames: frames
   end
 

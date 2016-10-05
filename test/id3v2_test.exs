@@ -1,11 +1,13 @@
 defmodule ID3v2Test do
   use ExUnit.Case
 
+	@testfile "web/static/assets/mp3/Sonic_the_Hedgehog_2_Above_the_Sky_OC_ReMix.mp3"
+
   test "header extraction" do
-    file = File.read!("web/static/assets/mp3/Sonic_the_Hedgehog_2_Above_the_Sky_OC_ReMix.mp3")
+    file = File.read!(@testfile)
     header = ID3v2.header(file)
-    assert header.version == {4, 0}
-    assert header.flags.unsynchronized
+    assert header.version == {3, 0}
+    assert !header.flags.unsynchronized
     assert header.size == 73497
   end
 
@@ -43,14 +45,61 @@ defmodule ID3v2Test do
   end
 
   test "frame data" do
-    frames = ID3v2.frames(File.read!("ats_new.mp3"))
-    assert frames["TALB"] == "http://ocremix.org"
+    frames = ID3v2.frames(File.read!(@testfile))
+    assert frames["TALB"]
+		assert frames["TCOM"]
+		assert frames["TIT1"]
+		assert frames["TCOP"]
+		assert frames["TENC"]
+		assert frames["TSSE"]
+		assert frames["TCON"]
+		assert frames["TCMP"]
+		assert frames["TOAL"]
+		assert frames["TOPE"]
+		assert frames["TPUB"]
+		assert frames["TIT3"]
+		assert frames["TIT2"]
+		assert frames["TRCK"]
+		assert frames["TYER"]
+		assert frames["WOAR"]
+		assert frames["TXXX"]
+		assert frames["WXXX"]
   end
 
-  test "extract null-terminated" do
-    {description, rest} = ID3v2.extract_null_terminated << 1, 255, 254, "Wat"::utf16, 00, 00, 65, 66, 67 >>
+  test "extract null-terminated ascii" do
+    {description, rest, bom} = ID3v2.extract_null_terminated << 3, "Wat", 00, "ABC" >>
     assert description == "Wat"
     assert rest == "ABC"
+    assert bom == nil
+  end
+
+  test "extract null-terminated utf8" do
+    {description, rest, bom} = ID3v2.extract_null_terminated << 3, "Wat", 00, "合"::utf8 >>
+    assert description == "Wat"
+    assert rest == "合"
+    assert bom == nil
+  end
+
+  test "extract null-terminated utf16" do
+    {description, rest, bom} = ID3v2.extract_null_terminated << 1, 255, 254, "Wat"::utf16, 00, 00, 65, 66, 67 >>
+    assert description == "Wat"
+    assert rest == "ABC"
+    assert bom == <<255, 254>>
+  end
+
+  test "read user url" do
+    link = ID3v2.read_user_url << 1, 255, 254, "Desc"::utf16-little, 00, 00, "http://bogus.url" >>
+    assert link == "http://bogus.url"
+  end
+
+  test "read user text" do
+    text = ID3v2.read_user_text << 1, 255, 254, "Desc"::utf16-little, 00, 00, "Value"::utf16-little >>
+    assert text == "Value"
+  end
+
+  test "read user text utf8" do
+    text = ID3v2.read_user_text << 3, "Desc", 00, "Value" >>
+    assert text == "Value"
   end
 
 end

@@ -1,5 +1,5 @@
 <div>
-  <%= for frame <- @frames do %>
-    <p><tt><%= frame[:key] %></tt>: <%= frame[:value] %></p>
+  <%= for {key, value} <- @frames do %>
+    <p><tt><%= key %></tt>: <%= value %></p>
   <% end %>
 </div>
