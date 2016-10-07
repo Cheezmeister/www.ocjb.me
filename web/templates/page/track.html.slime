@@ -9,5 +9,8 @@ div.track.row.well id="track-details-#{@track.number}" data-title=@track.title
     a.pull-right id="dl-blueblue-#{@track.number}" href=@track.srcUrl
       span aria-title="Download"
         i.fa.fa-download aria-hidden="true" title="Download from BlueBlue.fr"
-    a.pull-right href="/tags/#{@track.basename}" Tags
+    a.pull-right href="/tags/#{@track.basename}"
+      span aria-title="Tags"
+        i.fa.fa-tag aria-hidden="true" title="View Metadata"
+          
     

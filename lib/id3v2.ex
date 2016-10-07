@@ -18,8 +18,43 @@ defmodule ID3v2 do
     end
   end
 
-  defmodule Frame do
-    defstruct [:key, :value, :encoding, :size]
+  defmodule FrameHeaderFlags do
+    defstruct [
+      :tag_alter_preservation,
+      :file_alter_preservation,
+      :read_only,
+      :grouping_identity,
+      :compression,
+      :encryption,
+      :unsynchronisation,
+      :data_length_indicator,
+    ]
+
+    @tag_alter_preservation_bit (1 <<< 15)
+    @file_alter_preservation_bit (1 <<< 14)
+    @read_only_bit (1 <<< 13)
+    @grouping_identity_bit 16
+    @compression_bit 8
+    @encryption_bit 4
+    @unsynchronisation_bit 2
+    @data_length_indicator_bit 1
+
+    def read(doublebyte) do
+      %FrameHeaderFlags{
+        tag_alter_preservation: 0 != (doublebyte &&& @tag_alter_preservation_bit),
+        file_alter_preservation: 0 != (doublebyte &&& @file_alter_preservation_bit),
+        read_only: 0 != (doublebyte &&& @read_only_bit),
+        tag_alter_preservation: 0 != (doublebyte &&& @tag_alter_preservation_bit),
+        file_alter_preservation: 0 != (doublebyte &&& @file_alter_preservation_bit),
+        read_only: 0 != (doublebyte &&& @read_only_bit),
+        grouping_identity: 0 != (doublebyte &&& @grouping_identity_bit),
+        compression: 0 != (doublebyte &&& @compression_bit),
+        encryption: 0 != (doublebyte &&& @encryption_bit),
+        unsynchronisation: 0 != (doublebyte &&& @unsynchronisation_bit),
+        data_length_indicator: 0 != (doublebyte &&& @data_length_indicator_bit),
+      }
+    end
+
   end
 
   @doc"""
@@ -62,30 +97,36 @@ defmodule ID3v2 do
   end
 
   def frames(filecontent) do
-    headerSize = header(filecontent).size
+    h = header(filecontent)
+    headerSize = h.size
     << _header :: binary-size(10), framedata :: binary-size(headerSize), _ :: binary >> = filecontent
 
-    _read_frames(framedata)
+    _read_frames(h, framedata)
   end
 
   # Handle padding bytes at the end of the tag
-  def _read_frames(<<0, _ :: binary>>) do
+  def _read_frames(_, <<0, _ :: binary>>) do
     %{}
   end
-  def _read_frames(framedata) do
+  def _read_frames(header, framedata) do
 
     << frameheader :: binary-size(10), rest :: binary >> = framedata
-    << key :: binary-size(4), size :: integer-32, _flags :: binary-size(2) >> = frameheader
+    << key :: binary-size(4), size :: binary-size(4), flags :: binary-size(2) >> = frameheader
     # TODO handle flags
     # TODO handle synchsafe size if version 2.4
     # TODO Handle optional language prefix
-    pldSize = size
+    pldSize = case header.version do
+      {3, _} -> <<s::integer-32>> = size; s
+      {4, _} -> unpacked_size size
+      {v, _} -> raise "ID3v2.#{v} not supported"
+    end
+
     << payload :: binary-size(pldSize), rest :: binary >> = rest
 
     value = read_payload key, payload
-    # DEBUG IO.puts "#{key}: #{value}"
+    IO.puts "#{key}: #{value}"
 
-    Map.merge %{key => value}, _read_frames(rest)
+    Map.merge %{key => value}, _read_frames(header, rest)
   end
 
   def read_payload(key, payload) do
@@ -161,6 +202,20 @@ defmodule ID3v2 do
   def read_utf16(bom, content) do
     {encoding, _charsize} = :unicode.bom_to_encoding(bom)
     :unicode.characters_to_binary content, encoding
+  end
+
+  def strip_zero_bytes(<<h>>) do
+    case h do
+      0 -> (<<>>)
+      _ -> <<h>>
+    end
+  end
+
+  def strip_zero_bytes(<<h, t::binary>>) do
+    case h do
+      0 -> <<t>>
+      _ -> <<h, t>>
+    end
   end
 
 end

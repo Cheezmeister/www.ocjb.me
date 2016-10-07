@@ -1,16 +1,16 @@
 /* This file is for your main application css. */
 body {
-  background: rgb(195, 142, 251) none repeat scroll 0% 0%;
+  background: rgb(215, 162, 251) none repeat scroll 0% 0%;
 }
 
 .row.track {
   border: 1px solid gray;
-  background: #ccffcc;
+  background: #fff0de;
 }
 
 .track-info {
 }
 
 .row.track.nowplaying {
-  background: #fff0de;
+  background: #ccffcc;
 }
