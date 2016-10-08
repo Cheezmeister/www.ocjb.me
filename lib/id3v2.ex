@@ -39,7 +39,7 @@ defmodule ID3v2 do
     @unsynchronisation_bit 2
     @data_length_indicator_bit 1
 
-    def read(doublebyte) do
+    def read(<<doublebyte::integer-16>>) do
       %FrameHeaderFlags{
         tag_alter_preservation: 0 != (doublebyte &&& @tag_alter_preservation_bit),
         file_alter_preservation: 0 != (doublebyte &&& @file_alter_preservation_bit),
@@ -96,6 +96,9 @@ defmodule ID3v2 do
     byte4 + (byte3<<<7) + (byte2<<<14) + (byte1<<<21)
   end
 
+  @doc"""
+  TODO
+  """
   def frames(filecontent) do
     h = header(filecontent)
     headerSize = h.size
@@ -112,9 +115,9 @@ defmodule ID3v2 do
 
     << frameheader :: binary-size(10), rest :: binary >> = framedata
     << key :: binary-size(4), size :: binary-size(4), flags :: binary-size(2) >> = frameheader
-    # TODO handle flags
-    # TODO handle synchsafe size if version 2.4
-    # TODO Handle optional language prefix
+
+    flags = FrameHeaderFlags.read flags
+
     pldSize = case header.version do
       {3, _} -> <<s::integer-32>> = size; s
       {4, _} -> unpacked_size size
@@ -123,26 +126,42 @@ defmodule ID3v2 do
 
     << payload :: binary-size(pldSize), rest :: binary >> = rest
 
+    # TODO handle more flags
+    payload = if flags.unsynchronisation do
+      p = if flags.data_length_indicator do
+        <<_size::integer-32, p::binary>> = payload; p
+      else
+        payload
+      end
+      strip_zero_bytes p
+    else
+      payload
+    end
+
     value = read_payload key, payload
     IO.puts "#{key}: #{value}"
 
     Map.merge %{key => value}, _read_frames(header, rest)
   end
 
+  @doc"""
+  TODO
+  """
   def read_payload(key, payload) do
     << _encoding :: integer-8, _rest :: binary>> = payload
 
     # Special case nonsense goes here
     case key do
       "WXXX" -> read_user_url payload
-      "TXXX" -> read_user_text payload
-      "APIC" -> "" # Ignore embedded JPEG data
+      "TXXX" -> "" # TODO read_user_text payload
+      "APIC" -> "" # TODO Handle embedded JPEG data?
       _ -> read_standard_payload payload
     end
   end
 
   def read_standard_payload(payload) do
     << encoding :: integer-8, rest :: binary>> = payload
+    # TODO Handle optional 3-byte language prefix
     case encoding do
       0 -> rest
       1 -> read_utf16 rest
@@ -204,18 +223,22 @@ defmodule ID3v2 do
     :unicode.characters_to_binary content, encoding
   end
 
-  def strip_zero_bytes(<<h>>) do
+  def strip_zero_bytes(<<h, t::binary>>) do
     case h do
-      0 -> (<<>>)
-      _ -> <<h>>
+      0 -> t
+      _ -> << h, strip_zero_bytes(t)::binary>>
     end
   end
 
-  def strip_zero_bytes(<<h, t::binary>>) do
+  def strip_zero_bytes(<<h>>) do
     case h do
-      0 -> <<t>>
-      _ -> <<h, t>>
+      0 -> <<>>
+      _ -> h
     end
+  end
+
+  def strip_zero_bytes(<<>>) do
+    <<>>
   end
 
 end

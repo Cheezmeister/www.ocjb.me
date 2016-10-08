@@ -44,27 +44,6 @@ defmodule ID3v2Test do
     assert "pants" == ID3v2.read_payload("XXXX", << 3, "pants" :: utf8 >>)
   end
 
-  # test "frame data" do
-  #   frames = ID3v2.frames(File.read!(@testfile))
-  #   assert frames["TALB"]
-		# assert frames["TIT1"]
-		# assert frames["TCOP"]
-		# assert frames["TENC"]
-		# assert frames["TSSE"]
-		# assert frames["TCON"]
-		# assert frames["TCMP"]
-		# assert frames["TOAL"]
-		# assert frames["TOPE"]
-		# assert frames["TPUB"]
-		# assert frames["TIT3"]
-		# assert frames["TIT2"]
-		# assert frames["TRCK"]
-		# assert frames["TYER"]
-		# assert frames["WOAR"]
-		# assert frames["TXXX"]
-		# assert frames["WXXX"]
-  # end
-
   test "extract null-terminated ascii" do
     {description, rest, bom} = ID3v2.extract_null_terminated << 3, "Wat", 00, "ABC" >>
     assert description == "Wat"
@@ -103,6 +82,21 @@ defmodule ID3v2Test do
 
   test "strip zero bytes" do
     assert ID3v2.strip_zero_bytes(<<0>>) == <<>>
+    assert ID3v2.strip_zero_bytes(<<>>) == <<>>
+  end
+
+  test "strip zero bytes complex" do
+    assert ID3v2.strip_zero_bytes(<<0, 255>>) == <<255>>
+    assert ID3v2.strip_zero_bytes(<<255, 0>>) == <<255>>
+    assert ID3v2.strip_zero_bytes(<<255, 255>>) == <<255, 255>>
+    assert ID3v2.strip_zero_bytes(<<255, 0, 255>>) == <<255, 255>>
+    assert ID3v2.strip_zero_bytes(<<0, 255, 255>>) == <<255, 255>>
+    assert ID3v2.strip_zero_bytes(<< 255, 255, 0 >>) == <<255, 255>>
+  end
+
+  test "frame data" do
+    frames = ID3v2.frames(File.read!(@testfile))
+    assert frames["TALB"] == "OC ReMix" <> <<0>>
   end
 
 end
