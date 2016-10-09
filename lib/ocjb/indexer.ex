@@ -33,17 +33,10 @@ defmodule Ocjb.Indexer do
   end
 
   def prep_single_track(file) do
-    trackmeta = extract_id3 file
-    fullmeta = File.read!(file) |> ID3v2.frames
-    basename = Path.basename(file)
-    filemeta = %{
-      ocrUrl: "http://ocremix.org/music/OCR0#{fullmeta["TRCK"]}",
-      srcUrl: "http://ocr.blueblue.fr/files/music/remixes" |> Path.join(basename),
-      devUrl: "/mp3" |> Path.join(basename),
-      basename: basename,
-      fullmeta: fullmeta
+    %{
+      basename: Path.basename(file),
+      fullmeta: File.read!(file) |> ID3v2.frames
     }
-    Map.merge trackmeta, filemeta
   end
 
 
