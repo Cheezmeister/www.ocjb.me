@@ -1,6 +1,6 @@
 .center-children
   h4
-    | Now Playing:
+    | Now Playing:&nbsp;
     span#track-title
   .row
     .col-sm-6

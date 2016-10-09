@@ -1,8 +1,3 @@
-<div class="hide jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A schwifty web framework that<br />does not compromise speed and maintainability.</p>
-</div>
-
 <%= render "header.html", assigns %>
 
 <div id="tracklist" class="tracklist">

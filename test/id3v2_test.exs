@@ -96,7 +96,7 @@ defmodule ID3v2Test do
 
   test "frame data" do
     frames = ID3v2.frames(File.read!(@testfile))
-    assert frames["TALB"] == "OC ReMix" <> <<0>>
+    assert frames["TALB"] == "OC ReMix"
   end
 
 end

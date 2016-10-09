@@ -3,7 +3,7 @@ body {
   background: rgb(215, 162, 251) none repeat scroll 0% 0%;
 }
 
-.row.track {
+.track {
   border: 1px solid gray;
   background: #fff0de;
 }
@@ -11,6 +11,10 @@ body {
 .track-info {
 }
 
-.row.track.nowplaying {
+.track.nowplaying {
   background: #ccffcc;
+}
+
+.track:hover {
+  background: #ccccff;
 }

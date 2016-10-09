@@ -5,8 +5,8 @@ defmodule Ocjb.Indexer do
   @folder "web/static/assets/mp3"
   @trackglob "**/*.mp3"
 
-  def start_link(state, opts) do
-    :timer.sleep 5000
+  def start_link(_previousState, opts) do
+    :timer.sleep 2000
     state = prep_tracklist
     GenServer.start_link(__MODULE__, state, opts)
   end
@@ -34,11 +34,14 @@ defmodule Ocjb.Indexer do
 
   def prep_single_track(file) do
     trackmeta = extract_id3 file
+    fullmeta = File.read!(file) |> ID3v2.frames
     basename = Path.basename(file)
     filemeta = %{
-      ocrUrl: 'http://ocremix.org',
+      ocrUrl: "http://ocremix.org/music/OCR0#{fullmeta["TRCK"]}",
       srcUrl: "http://ocr.blueblue.fr/files/music/remixes" |> Path.join(basename),
+      devUrl: "/mp3" |> Path.join(basename),
       basename: basename,
+      fullmeta: fullmeta
     }
     Map.merge trackmeta, filemeta
   end

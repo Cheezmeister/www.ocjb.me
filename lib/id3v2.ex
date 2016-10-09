@@ -138,8 +138,8 @@ defmodule ID3v2 do
       payload
     end
 
-    value = read_payload key, payload
-    IO.puts "#{key}: #{value}"
+    value = read_payload(key, payload) |> strip_zero_bytes
+    # DEBUG IO.puts "#{key}: #{value}"
 
     Map.merge %{key => value}, _read_frames(header, rest)
   end

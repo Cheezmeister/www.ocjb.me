@@ -1,16 +1,25 @@
-div.track.row.well id="track-details-#{@track.number}" data-title=@track.title
-  .track-info.col-sm-6 name="trackinfo"
-    h5.track-title= @track.title
-    h6.track-artist= @track.artist
-  .download.col-sm-6
-    a.hide href=@track.ocrUrl
+- number = @track.fullmeta["TRCK"]
+- title = @track.fullmeta["TIT3"]
+- artist = @track.fullmeta["TPE1"]
+- game = @track.fullmeta["TIT1"]
+- system = @track.fullmeta["TOPE"]
+
+div.track.row id="track-#{number}" data-title=title data-number=number
+  .track-info.col-sm-4 name="trackinfo"
+    h5.track-title
+      a href="/tags/#{@track.basename}" =title
+    h6.track-artist= artist
+  .game-info.col-sm-4 name="gameinfo"
+    h5.game-title =game
+    h6.game-system =system
+  .links.col-sm-4
+    a href=@track.ocrUrl
       span aria-title="On OC ReMix"
         img src='/images/ocremix.org.ico'
-    a.pull-right id="dl-blueblue-#{@track.number}" href=@track.srcUrl
+    a.download.pull-right id="dl-dev-#{number}" href=@track.devUrl
       span aria-title="Download"
-        i.fa.fa-download aria-hidden="true" title="Download from BlueBlue.fr"
-    a.pull-right href="/tags/#{@track.basename}"
-      span aria-title="Tags"
-        i.fa.fa-tag aria-hidden="true" title="View Metadata"
-          
+        img.fa.fa-download aria-hidden="true" alt="DL" title="Download from Development"
+    a.download.pull-right id="dl-blueblue-#{number}" href=@track.srcUrl
+      span aria-title="Download"
+        img.fa.fa-download aria-hidden="true" alt="DL" title="Download from BlueBlue.fr"
     

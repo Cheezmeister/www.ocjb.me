@@ -34,31 +34,43 @@ let nowPlayingSpan = document.getElementById(ID_TRACK_TITLE)
 nowPlaying.onended = playRandomTrack
 fastForwardButton.onclick = playRandomTrack
 nowPlaying.muted = window.location.search === '?quiet'
+init()
 playRandomTrack()
 
-function playRandomTrack() {
-  let trackNum = Math.ceil(Math.random() * trackCount)
-  playTrack(trackNum)
+function init() {
+  let trackDetails = document.getElementsByClassName(CLASS_TRACK_DETAILS)
+  for (let idx = 0; idx < trackCount; idx++) {
+    let trackDetail = trackDetails[idx]
+    trackDetail.onclick = (e)=>trackClicked(trackDetail,e)
+  }
 }
 
-function playTrack(trackNumber) {
+function playRandomTrack() {
+  let trackIndex = Math.ceil(Math.random() * trackCount)
+  let trackDetail = document.getElementsByClassName('track')[trackIndex]
+  playTrack(trackDetail)
+}
+
+function trackClicked(trackDetail, event) {
+  playTrack(trackDetail)
+}
+
+function playTrack(trackDetail) {
   // TODO Use all mirrors to fallback
-  let link = document.getElementById(`dl-blueblue-${trackNumber}`)
+  let trackNumber = trackDetail.dataset.number
+  let link = document.getElementById(`dl-dev-${trackNumber}`)
   nowPlaying.src = link.href
   nowPlaying.play()
 
+  // TODO clear styles without this nonsense
   let trackDetails = document.getElementsByClassName(CLASS_TRACK_DETAILS)
-
   for (let idx = 0; idx < trackCount; idx++) {
     let trackDetail = trackDetails[idx]
-    if (trackDetail.id == `track-details-${trackNumber}`) {
-      trackDetail.attributes['class'].value = 'track row well nowplaying'
-      nowPlayingSpan.innerHTML = trackDetail.dataset.title
-      document.title = trackDetail.dataset.title
-      console.log(trackDetail)
-    } else {
-      trackDetail.attributes['class'].value = 'track row well'
-    }
+    trackDetail.attributes['class'].value = 'track row'
   }
+
+  trackDetail.attributes['class'].value = 'track row nowplaying'
+  nowPlayingSpan.innerHTML = trackDetail.dataset.title
+  document.title = trackDetail.dataset.title
 }
 
