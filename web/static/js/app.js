@@ -46,7 +46,7 @@ function init() {
 }
 
 function playRandomTrack() {
-  let trackIndex = Math.ceil(Math.random() * trackCount)
+  let trackIndex = Math.floor(Math.random() * trackCount)
   let trackDetail = document.getElementsByClassName('track')[trackIndex]
   playTrack(trackDetail)
 }
