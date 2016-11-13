@@ -1,5 +1,7 @@
 defmodule Ocjb.Indexer do
 
+  require Logger
+
   use GenServer
   
   @trackglob "**/*.mp3"
