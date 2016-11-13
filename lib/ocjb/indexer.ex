@@ -34,6 +34,7 @@ defmodule Ocjb.Indexer do
   end
 
   def prep_single_track(file) do
+    Logger.debug "Reading tags from #{file}"
     %{
       basename: Path.basename(file),
       fullmeta: File.read!(file) |> ID3v2.frames
