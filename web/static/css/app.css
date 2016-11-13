@@ -18,3 +18,7 @@ body {
 .track:hover {
   background: #ccccff;
 }
+
+.links .download {
+  margin: 0 4px 0 4px;
+}

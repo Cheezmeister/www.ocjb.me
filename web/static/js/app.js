@@ -56,17 +56,22 @@ function trackClicked(trackDetail, event) {
 }
 
 function playTrack(trackDetail) {
-  // TODO Use all mirrors to fallback
   let trackNumber = trackDetail.dataset.number
-  let link = document.getElementById(`dl-dev-${trackNumber}`)
-  nowPlaying.src = link.href
+  nowPlaying.pause()
+  nowPlaying.innerHTML = ''
+  for (let mirror of ['aplus', 'blueblue', 'ocrmirror']) {
+    let link = document.getElementById(`dl-${mirror}-${trackNumber}`)
+    let source = document.createElement('source')
+    source.src = link.href
+    nowPlaying.appendChild(source)
+    nowPlaying.src = link.href
+  }
   nowPlaying.play()
 
   // TODO clear styles without this nonsense
   let trackDetails = document.getElementsByClassName(CLASS_TRACK_DETAILS)
-  for (let idx = 0; idx < trackCount; idx++) {
-    let trackDetail = trackDetails[idx]
-    trackDetail.attributes['class'].value = 'track row'
+  for (let el of trackDetails) {
+    el.attributes['class'].value = 'track row'
   }
 
   trackDetail.attributes['class'].value = 'track row nowplaying'

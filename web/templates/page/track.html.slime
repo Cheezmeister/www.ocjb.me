@@ -13,13 +13,19 @@ div.track.row id="track-#{number}" data-title=title data-number=number
     h5.game-title =game
     h6.game-system =system
   .links.col-sm-4
-    a href=@track.ocrUrl
+    a href=ocr_url(@track)
       span aria-title="On OC ReMix"
         img src='/images/ocremix.org.ico'
     a.download.pull-right id="dl-dev-#{number}" href=@track.devUrl
       span aria-title="Download"
-        img.fa.fa-download aria-hidden="true" alt="DL" title="Download from Development"
-    a.download.pull-right id="dl-blueblue-#{number}" href=@track.srcUrl
+        i.fa.fa-download aria-hidden="true" alt="DL" title="Download from Development"
+    a.download.pull-right id="dl-blueblue-#{number}" href=blueblue_url(@track)
       span aria-title="Download"
-        img.fa.fa-download aria-hidden="true" alt="DL" title="Download from BlueBlue.fr"
+        i.fa.fa-download aria-hidden="true" alt="DL" title="Download from BlueBlue.fr"
+    a.download.pull-right id="dl-aplus-#{number}" href=aplus_url(@track)
+      span aria-title="Download"
+        i.fa.fa-download aria-hidden="true" alt="DL" title="Download from Aplus"
+    a.download.pull-right id="dl-ocrmirror-#{number}" href=ocrmirror_url(@track)
+      span aria-title="Download"
+        i.fa.fa-download aria-hidden="true" alt="DL" title="Download from ocrmirror.org"
     

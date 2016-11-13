@@ -12,7 +12,8 @@ config :ocjb, Ocjb.Endpoint,
   code_reloader: true,
   check_origin: false,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
-                    cd: Path.expand("../", __DIR__)]]
+                    cd: Path.expand("../", __DIR__)]],
+  music_dir: "web/static/assets/mp3"
 
 
 # Watch static and templates for browser reloading.

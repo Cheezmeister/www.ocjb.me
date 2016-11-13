@@ -43,6 +43,7 @@ defmodule Ocjb.Web do
 
       import Ocjb.Router.Helpers
       import Ocjb.ErrorHelpers
+      import Ocjb.PageHelpers
       import Ocjb.Gettext
     end
   end

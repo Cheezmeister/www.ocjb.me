@@ -1,8 +1,7 @@
 defmodule Ocjb.Indexer do
 
   use GenServer
-
-  @folder "web/static/assets/mp3"
+  
   @trackglob "**/*.mp3"
 
   def start_link(_previousState, opts) do
@@ -16,7 +15,9 @@ defmodule Ocjb.Indexer do
   end
 
   def prep_tracklist do
-    list(@folder) |> Enum.map(&prep_single_track/1) |> number_list
+    folder = Application.get_env(:ocjb, Ocjb.Endpoint)[:music_dir]
+    IO.puts "Folder: #{folder}"
+    list(folder) |> Enum.map(&prep_single_track/1) |> number_list
   end
 
   def list(folder) do
