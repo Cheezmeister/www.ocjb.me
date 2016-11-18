@@ -40,7 +40,7 @@ defmodule Ocjb.PageHelpers do
   end
 
   defp _download_url(base_url, basename) do
-    base_url |> Path.join basename
+    base_url |> Path.join(basename)
   end
 
 end
