@@ -4,7 +4,8 @@ use Mix.Config
 # you can enable the server option below.
 config :ocjb, Ocjb.Endpoint,
   http: [port: 4001],
-  server: false
+  server: false,
+  music_dir: "web/static/assets/mp3"
 
 # Print only warnings and errors during test
 config :logger, level: :warn
