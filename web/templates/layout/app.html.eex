@@ -7,17 +7,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Overclocked Jukebox</title>
+    <title>OverClocked Jukebox</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
   </head>
 
   <body>
+    <%= render Ocjb.SharedView, "github-corner.html" %>
     <div class="container">
       <header class="header">
         <nav role="navigation">
-          <ul class="nav">
-            <li><a href="github.com/cheezmeister/ocjb">GitHub</a></li>
+          <ul class="nav nav-pills pull-right">
           </ul>
         </nav>
       </header>
@@ -31,5 +31,6 @@
 
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+
   </body>
 </html>

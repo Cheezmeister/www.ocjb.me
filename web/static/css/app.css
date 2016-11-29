@@ -17,6 +17,7 @@ body {
 
 .track:hover {
   background: #ccccff;
+  cursor: pointer;
 }
 
 .links .download {

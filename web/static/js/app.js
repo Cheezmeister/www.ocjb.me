@@ -76,6 +76,10 @@ function playTrack(trackDetail) {
 
   trackDetail.attributes['class'].value = 'track row nowplaying'
   nowPlayingSpan.innerHTML = trackDetail.dataset.title
-  document.title = trackDetail.dataset.title
+  document.title = formatTitle(trackDetail.dataset.title)
+}
+
+function formatTitle(trackTitle) {
+  return `${trackTitle} - OverClocked Jukebox`
 }
 

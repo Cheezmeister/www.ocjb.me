@@ -13,7 +13,7 @@ config :ocjb, Ocjb.Endpoint,
   check_origin: false,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
                     cd: Path.expand("../", __DIR__)]],
-  music_dir: "web/static/assets/mp3"
+  music_dir: "music"
 
 
 # Watch static and templates for browser reloading.
