@@ -2,6 +2,7 @@
   h4
     | Now Playing:&nbsp;
     span#track-title
+  p Shuffling #{length @tracks} smokin' tracks from www.ocremix.org
   .row
     .col-sm-6
       audio#nowplaying controls="controls" src=""
