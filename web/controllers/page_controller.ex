@@ -9,7 +9,7 @@ defmodule Ocjb.PageController do
         ocrUrl: "http://ocremix.org/music/OCR0#{track["TRCK"]}",
       }
     end
-    tracks = get_tracklist |> Enum.map(prep_track)
+    tracks = get_tracklist |> Enum.filter(&(&1)) |> Enum.map(prep_track)
     render conn, "index.html", tracks: tracks
   end
 
