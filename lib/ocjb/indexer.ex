@@ -40,22 +40,12 @@ defmodule Ocjb.Indexer do
     seen = files |> Enum.zip(files |> Enum.map(fn(_)->true end)) |> Enum.into(%{}) |> Map.merge(seen)
     tracklist = files
       |> Enum.map(&prep_single_track/1) 
-      |> number_list
       |> Enum.concat(tracklist)
     {seen, tracklist}
   end
 
   def list(folder) do
     folder |> Path.join(@trackglob) |> Path.wildcard
-  end
-
-  def number_list(list) do
-    accum = fn cur, {num, out} ->
-      curout = Map.merge %{number: num}, cur
-      {num+1, [curout | out]}
-    end
-    {_, out} = List.foldr list, {1,[]}, accum
-    out
   end
 
   def prep_single_track(file) do
@@ -70,36 +60,8 @@ defmodule Ocjb.Indexer do
   def extract_id3v2(content, file) do
     %{
       basename: Path.basename(file),
-      fullmeta: content |> ID3v2.frames
+      fullmeta: content |> ID3v2.frames |> Map.delete("COMM")
     }
   end
-
-
-  # def extract_id3(file) do
-  #   metadata = extract_metadata(file)
-  #   parse_id3(metadata)
-  # end
-
-  # def extract_metadata(file) do
-  #   read_file = File.read!(file)
-  #   file_length = byte_size(read_file)
-  #   music_data = file_length - 128
-  #   << _ :: binary-size(music_data), id3_section :: binary >> = read_file
-  #   id3_section
-  # end
-
-  # defp parse_id3(metadata) do
-  #   << _ :: binary-size(3), title :: binary-size(30), artist :: binary-size(30), album :: binary-size(30), _ :: binary >> = metadata
-  #   %{
-  #     title: sanitize(title),
-  #     artist: sanitize(artist),
-  #     album: sanitize(album)
-  #   }
-  # end
-
-  # defp sanitize(text) do
-  #   not_zero = &(&1 != <<0>>)
-  #   text |> String.graphemes |> Enum.filter(not_zero) |> to_string |> String.strip
-  # end
 
 end

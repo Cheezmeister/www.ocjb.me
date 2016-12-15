@@ -15,7 +15,8 @@ defmodule Ocjb.PageController do
 
   def tags(conn, params) do
     filename = params["filename"]
-    file = File.read! "web/static/assets/mp3/#{filename}"
+    folder = Application.get_env(:ocjb, Ocjb.Endpoint)[:music_dir]
+    file = File.read! "#{folder}/#{filename}"
     frames = ID3v2.frames file
     render conn, "tags.html", frames: frames
   end
