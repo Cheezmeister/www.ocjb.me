@@ -6,7 +6,7 @@ defmodule Ocjb.Indexer do
   
   @trackglob "*.mp3"
   @batchsize 50
-  @interval_seconds 20
+  @interval_seconds 2
 
   def start_link(_previousState, opts) do
     GenServer.start_link(__MODULE__, {%{}, []}, opts)
@@ -36,7 +36,7 @@ defmodule Ocjb.Indexer do
     files = list(folder) 
       |> Enum.filter(fn f -> !(seen[f]) end)
       |> Enum.take(@batchsize)
-    Logger.info "Indexing: #{files |> Enum.join(",")}"
+    Logger.info "Indexing #{files |> Enum.count} tracks..."
     seen = files |> Enum.zip(files |> Enum.map(fn(_)->true end)) |> Enum.into(%{}) |> Map.merge(seen)
     tracklist = files
       |> Enum.map(&prep_single_track/1) 
