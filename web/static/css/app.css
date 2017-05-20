@@ -3,9 +3,50 @@ body {
   background: rgb(215, 162, 251) none repeat scroll 0% 0%;
 }
 
+header, footer {
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+}
+
+header {
+  /* height: 32px; */
+  background: #38BC8F;
+  border-bottom: 1px solid gray;
+}
+footer {
+  position: absolute;
+  bottom: 0px;
+}
+
+a.github-corner svg {
+  z-index: 9001;
+}
+
 .track {
   border: 1px solid gray;
+  margin-bottom: -1px;
   background: #fff0de;
+}
+
+.track-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.track-title:hover {
+  overflow: visible;
+  background:white;
+  z-index: 9001;
+}
+
+.track-artist ::before {
+  content: ' byy ';
+}
+
+.source-system ::before {
+  content: ' oon';
 }
 
 .track-info {

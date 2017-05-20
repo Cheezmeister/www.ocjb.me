@@ -8,12 +8,18 @@
     <meta name="author" content="">
 
     <title>OverClocked Jukebox</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
     <%= render Ocjb.SharedView, "github-corner.html" %>
+
+    <header>
+      <%= render @view_module, "header.html", assigns %>
+    </header>
+
     <div class="container">
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
@@ -23,7 +29,11 @@
         <%= render @view_module, @view_template, assigns %>
       </main>
 
-    </div> <!-- /container -->
+    </div>
+    <footer>
+      <%= render @view_module, "footer.html", assigns %>
+    </footer>
+
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
   </body>

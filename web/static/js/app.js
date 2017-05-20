@@ -25,6 +25,9 @@ const CLASS_TRACK_DETAILS = 'track'
 const ID_NOW_PLAYING = 'nowplaying'
 const ID_FAST_FORWARD = 'fast-forward'
 const ID_TRACK_TITLE = 'track-title'
+const ID_TRACK_ARTIST = 'track-artist'
+const ID_SOURCE_GAME = 'source-game'
+const ID_SOURCE_SYSTEM = 'source-system'
 
 let trackCount = document.getElementsByClassName(CLASS_TRACK_DETAILS).length
 let nowPlaying = document.getElementById(ID_NOW_PLAYING)
@@ -68,15 +71,15 @@ function playTrack(trackDetail) {
   }
   nowPlaying.play()
 
+  nowPlayingSpan.innerHTML = trackDetail.dataset.title
+  document.title = formatTitle(trackDetail.dataset.title)
+
   // TODO clear styles without this nonsense
   let trackDetails = document.getElementsByClassName(CLASS_TRACK_DETAILS)
   for (let el of trackDetails) {
     el.attributes['class'].value = 'track row'
   }
-
   trackDetail.attributes['class'].value = 'track row nowplaying'
-  nowPlayingSpan.innerHTML = trackDetail.dataset.title
-  document.title = formatTitle(trackDetail.dataset.title)
 }
 
 function formatTitle(trackTitle) {

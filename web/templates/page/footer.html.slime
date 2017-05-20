@@ -1,0 +1,4 @@
+.row
+  .col-sm-12.hidden-md-down
+    marquee.small Shuffling #{length @tracks} smokin' tracks from www.ocremix.org
+

@@ -1,10 +1,16 @@
 .center-children
-  h4
-    | Now Playing:&nbsp;
-    span#track-title
-  p Shuffling #{length @tracks} smokin' tracks from www.ocremix.org
   .row
-    .col-sm-6
-      audio#nowplaying controls="controls" src=""
-    .controls.col-sm-6
-      i#fast-forward.btn.fa.fa-forward
+    .col-sm-4
+      .row
+        .col-sm-9
+          audio#nowplaying.pull-left controls="controls" src=""
+        .col-sm-3.controls
+          i#fast-forward.btn.fa.fa-forward.pull-right
+    .col-sm-4
+      span#track-title.large
+      br
+      span#track-artist.small Tweex
+    .col-sm-4
+      span#source-game.large Sonic 3
+      br
+      span#source-system.small Sega Genesis

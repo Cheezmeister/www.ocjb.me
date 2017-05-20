@@ -1,5 +1,3 @@
-<%= render "header.html", assigns %>
-
 <div id="tracklist" class="tracklist">
   <%= for track <- @tracks do %>
     <%= render "track.html", track: track %>
