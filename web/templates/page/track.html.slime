@@ -4,18 +4,20 @@
 - game = @track.fullmeta["TIT1"]
 - system = @track.fullmeta["TOPE"]
 
-div.track.row id="track-#{number}" data-title=title data-number=number
+div.track.row id="track-#{number}" data-title=title data-number=number data-artist=artist data-game=game data-system=system
   .track-info.col-sm-4 name="trackinfo"
-    h5.track-title
-      a href="/tags/#{@track.basename}" =title
-    h6.track-artist= artist
+    h5.track-title.ellipsize =title
+  .artist-info.col-sm-2
+    h6.track-artist.ellipsize =artist
   .game-info.col-sm-4 name="gameinfo"
-    h5.game-title =game
-    h6.game-system =system
-  .links.col-sm-4
+    h6.game-title.ellipsize ="#{game} (#{system})"
+  .links.col-sm-2
     a href=ocr_url(@track)
       span aria-title="On OC ReMix"
         img src='/images/ocremix.org.ico'
+    a href="/tags/#{@track.basename}"
+      span aria-title="Tags"
+        i.fa.fa-tag aria-hidden="true" alt="Tags" title="View Tags"
     a.download.pull-right id="dl-dev-#{number}" href=@track.devUrl
       span aria-title="Download"
         i.fa.fa-download aria-hidden="true" alt="DL" title="Download from Development"

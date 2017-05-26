@@ -33,6 +33,9 @@ let trackCount = document.getElementsByClassName(CLASS_TRACK_DETAILS).length
 let nowPlaying = document.getElementById(ID_NOW_PLAYING)
 let fastForwardButton = document.getElementById(ID_FAST_FORWARD)
 let nowPlayingSpan = document.getElementById(ID_TRACK_TITLE)
+let trackArtistSpan = document.getElementById(ID_TRACK_ARTIST)
+let sourceGameSpan = document.getElementById(ID_SOURCE_GAME)
+let sourceSystemSpan = document.getElementById(ID_SOURCE_SYSTEM)
 
 nowPlaying.onended = playRandomTrack
 fastForwardButton.onclick = playRandomTrack
@@ -71,8 +74,7 @@ function playTrack(trackDetail) {
   }
   nowPlaying.play()
 
-  nowPlayingSpan.innerHTML = trackDetail.dataset.title
-  document.title = formatTitle(trackDetail.dataset.title)
+  updateHeader(trackDetail)
 
   // TODO clear styles without this nonsense
   let trackDetails = document.getElementsByClassName(CLASS_TRACK_DETAILS)
@@ -82,6 +84,13 @@ function playTrack(trackDetail) {
   trackDetail.attributes['class'].value = 'track row nowplaying'
 }
 
+function updateHeader(trackDetail) {
+  nowPlayingSpan.innerHTML = trackDetail.dataset.title
+  trackArtistSpan.innerHTML = trackDetail.dataset.artist
+  sourceGameSpan.innerHTML = trackDetail.dataset.game
+  sourceSystemSpan.innerHTML = trackDetail.dataset.system
+  document.title = formatTitle(trackDetail.dataset.title)
+}
 function formatTitle(trackTitle) {
   return `${trackTitle} - OverClocked Jukebox`
 }

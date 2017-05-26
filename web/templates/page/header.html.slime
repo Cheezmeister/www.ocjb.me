@@ -1,16 +1,16 @@
 .center-children
   .row
     .col-sm-4
-      .row
-        .col-sm-9
+      .row.display-flex
+        .col-sm-9.center-children
           audio#nowplaying.pull-left controls="controls" src=""
         .col-sm-3.controls
           i#fast-forward.btn.fa.fa-forward.pull-right
     .col-sm-4
-      span#track-title.large
+      span#track-title.large.ellipsize
       br
-      span#track-artist.small Tweex
+      span#track-artist.small
     .col-sm-4
-      span#source-game.large Sonic 3
+      span#source-game.large.ellipsize
       br
-      span#source-system.small Sega Genesis
+      span#source-system.small

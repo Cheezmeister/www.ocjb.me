@@ -29,15 +29,14 @@ a.github-corner svg {
   background: #fff0de;
 }
 
-.track-title {
+.ellipsize {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.track-title:hover {
+.ellipsize:hover {
   overflow: visible;
-  background:white;
   z-index: 9001;
 }
 
