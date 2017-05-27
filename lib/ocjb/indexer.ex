@@ -34,6 +34,7 @@ defmodule Ocjb.Indexer do
   def prep_tracklist({seen, tracklist}) do
     folder = Application.get_env(:ocjb, Ocjb.Endpoint)[:music_dir]
     files = list(folder) 
+      |> Enum.take(2017)
       |> Enum.filter(fn f -> !(seen[f]) end)
       |> Enum.take(@batchsize)
     Logger.info "Indexing #{files |> Enum.count} tracks..."
