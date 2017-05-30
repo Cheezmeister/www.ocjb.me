@@ -37,17 +37,25 @@ let trackArtistSpan = document.getElementById(ID_TRACK_ARTIST)
 let sourceGameSpan = document.getElementById(ID_SOURCE_GAME)
 let sourceSystemSpan = document.getElementById(ID_SOURCE_SYSTEM)
 
-nowPlaying.onended = playRandomTrack
-fastForwardButton.onclick = playRandomTrack
-nowPlaying.muted = window.location.search === '?quiet'
 init()
 playRandomTrack()
 
 function init() {
+  nowPlaying.onended = playRandomTrack
+  fastForwardButton.onclick = playRandomTrack
+  nowPlaying.muted = window.location.search === '?quiet'
+  document.addEventListener('keypress', playOrPause)
+
   let trackDetails = document.getElementsByClassName(CLASS_TRACK_DETAILS)
   for (let idx = 0; idx < trackCount; idx++) {
     let trackDetail = trackDetails[idx]
     trackDetail.onclick = (e)=>trackClicked(trackDetail,e)
+  }
+}
+
+function playOrPause(e) {
+  if (e.key === ' ') {
+    nowPlaying.paused ? nowPlaying.play() : nowPlaying.pause()
   }
 }
 
@@ -91,6 +99,7 @@ function updateHeader(trackDetail) {
   sourceSystemSpan.innerHTML = trackDetail.dataset.system
   document.title = formatTitle(trackDetail.dataset.title)
 }
+
 function formatTitle(trackTitle) {
   return `${trackTitle} - OverClocked Jukebox`
 }
