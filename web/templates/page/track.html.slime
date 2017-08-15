@@ -15,12 +15,9 @@ div.track.row id="track-#{number}" data-title=title data-number=number data-arti
     a href=ocr_url(@track)
       span aria-title="On OC ReMix"
         img src='/images/ocremix.org.ico'
-    a href="/tags/#{@track.basename}"
-      span aria-title="Tags"
-        i.fa.fa-tag aria-hidden="true" alt="Tags" title="View Tags"
-    a.download.pull-right id="dl-dev-#{number}" href=@track.devUrl
-      span aria-title="Download"
-        i.fa.fa-download aria-hidden="true" alt="DL" title="Download from Development"
+    / a href="/tags/#{@track.basename}"
+    /   span aria-title="Tags"
+    /     i.fa.fa-tag aria-hidden="true" alt="Tags" title="View Tags"
     a.download.pull-right id="dl-blueblue-#{number}" href=blueblue_url(@track)
       span aria-title="Download"
         i.fa.fa-download aria-hidden="true" alt="DL" title="Download from BlueBlue.fr"

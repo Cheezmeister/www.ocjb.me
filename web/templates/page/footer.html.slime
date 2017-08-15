@@ -1,4 +1,5 @@
 .row
   .col-sm-12.hidden-md-down
-    marquee.small Shuffling #{length @tracks} smokin' tracks from www.ocremix.org
-
+    .center-text.small 
+      span Built with <3 with&nbsp;
+      a href="http://phoenixframework.org/" Phoenix

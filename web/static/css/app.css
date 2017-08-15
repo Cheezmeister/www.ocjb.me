@@ -14,13 +14,19 @@ header {
   background: #38BC8F;
   border-bottom: 1px solid gray;
 }
+
 footer {
-  position: absolute;
-  bottom: 0px;
+  border-top: 1px solid gray;
+  bottom: 0;
+  background: #25956F;
 }
 
 a.github-corner svg {
   z-index: 9001;
+}
+
+#tracklist {
+  padding-top: 3em;
 }
 
 .track {
@@ -62,4 +68,16 @@ a.github-corner svg {
 
 .links .download {
   margin: 0 4px 0 4px;
+}
+
+.links a {
+  float: right;
+}
+
+a.download {
+  display: none;
+}
+
+.center-text {
+  text-align: center;
 }
