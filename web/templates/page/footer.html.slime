@@ -1,5 +1,7 @@
 .row
   .col-sm-12.hidden-md-down
     .center-text.small 
-      span Built with <3 with&nbsp;
-      a href="http://phoenixframework.org/" Phoenix
+      span Built with <3 using&nbsp;
+        a href="http://phoenixframework.org/" Phoenix
+      span &nbsp;with thanks to&nbsp;
+        a href="http://ocremix.org/" OverClocked ReMix
