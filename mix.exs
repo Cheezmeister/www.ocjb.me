@@ -17,7 +17,7 @@ defmodule Ocjb.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Ocjb, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext]]
+     applications: [:appsignal, :phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext]]
   end
 
   # Specifies which paths to compile per environment.
@@ -35,6 +35,7 @@ defmodule Ocjb.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
+     {:appsignal, "~> 1.0"},
      {:id3v2, "~> 0.1.2"}]
   end
 end

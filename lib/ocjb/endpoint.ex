@@ -38,5 +38,8 @@ defmodule Ocjb.Endpoint do
     key: "_ocjb_key",
     signing_salt: "MfABpSeq"
 
+  # Per https://docs.appsignal.com/elixir/integrations/phoenix.html#incoming-http-requests
+  use Appsignal.Phoenix
+
   plug Ocjb.Router
 end
