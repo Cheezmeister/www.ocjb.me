@@ -12,6 +12,7 @@ config :ocjb, Ocjb.Endpoint,
   render_errors: [view: Ocjb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Ocjb.PubSub,
            adapter: Phoenix.PubSub.PG2],
+  music_dir: {:system, "MUSIC_DIR"},
   instrumenters: [Appsignal.Phoenix.Instrumenter]
 
 config :phoenix, :template_engines,
