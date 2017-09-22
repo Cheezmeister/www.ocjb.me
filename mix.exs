@@ -36,6 +36,6 @@ defmodule Ocjb.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:appsignal, "~> 1.0"},
-     {:id3v2, "~> 0.1.2"}]
+     {:id3v2, "~> 0.1.3"}]
   end
 end
