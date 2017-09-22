@@ -38,7 +38,6 @@ let sourceGameSpan = document.getElementById(ID_SOURCE_GAME)
 let sourceSystemSpan = document.getElementById(ID_SOURCE_SYSTEM)
 
 init()
-playRandomTrack()
 
 function init() {
   nowPlaying.onended = playRandomTrack
@@ -51,7 +50,17 @@ function init() {
     let trackDetail = trackDetails[idx]
     trackDetail.onclick = (e)=>trackClicked(trackDetail,e)
   }
+
+  if (window.location.hash) {
+    let [match, id] = window.location.hash.match(/#(track-\d+)/)
+    if (id) {
+      playTrack(document.getElementById(id))
+      return
+    }
+  }
+  playRandomTrack()
 }
+
 
 function playOrPause(e) {
   if (e.key === ' ') {

@@ -1,5 +1,5 @@
-- number = @track.fullmeta["TRCK"]
 - title = @track.fullmeta["TIT3"]
+- number = @track.fullmeta["TRCK"]
 - artist = @track.fullmeta["TPE1"]
 - game = @track.fullmeta["TIT1"]
 - system = @track.fullmeta["TOPE"]
@@ -27,4 +27,3 @@ div.track.row id="track-#{number}" data-title=title data-number=number data-arti
     a.download.pull-right id="dl-ocrmirror-#{number}" href=ocrmirror_url(@track)
       span aria-title="Download"
         i.fa.fa-download aria-hidden="true" alt="DL" title="Download from ocrmirror.org"
-    

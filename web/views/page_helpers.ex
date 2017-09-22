@@ -15,7 +15,7 @@ defmodule Ocjb.PageHelpers do
   """
   def ocr_url(track) do
     number = track.fullmeta["TRCK"]
-    "http://ocremix.org/remix/OCR#{number |> String.rjust(5, ?0)}"
+    "http://ocremix.org/remix/OCR#{number |> String.pad_leading(5, "0")}"
   end
 
   @doc """

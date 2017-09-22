@@ -13,7 +13,7 @@ defmodule Ocjb.Indexer do
   end
 
   def init(state) do
-    schedule_work
+    schedule_work()
     {:ok, prep_tracklist(state)}
   end
 
@@ -22,7 +22,7 @@ defmodule Ocjb.Indexer do
   end
 
   def handle_info(:work, state) do
-    schedule_work
+    schedule_work()
     {:noreply, prep_tracklist(state)}
   end
 
@@ -60,7 +60,9 @@ defmodule Ocjb.Indexer do
   def extract_id3v2(content, file) do
     %{
       basename: Path.basename(file),
-      fullmeta: content |> ID3v2.frames |> Map.delete("COMM")
+      fullmeta: content |> ID3v2.frames
+        |> Map.delete("COMM") # We don't use comment or lyrics text
+        |> Map.delete("USLT")
     }
   end
 
