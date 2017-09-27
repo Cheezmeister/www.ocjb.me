@@ -19,6 +19,13 @@ defmodule Ocjb.PageHelpers do
   end
 
   @doc """
+  Builds a deep-link URL to a specific track for sharing
+  """
+  def permalink(track) do
+    "/#track-#{track.fullmeta["TRCK"]}"
+  end
+
+  @doc """
   Builds a URL to Aplus download
   """
   def aplus_url(track) do

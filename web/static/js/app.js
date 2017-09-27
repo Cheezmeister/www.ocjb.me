@@ -65,6 +65,7 @@ function init() {
 function playOrPause(e) {
   if (e.key === ' ') {
     nowPlaying.paused ? nowPlaying.play() : nowPlaying.pause()
+    e.preventDefault()
   }
 }
 
