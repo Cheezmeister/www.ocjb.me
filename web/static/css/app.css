@@ -9,6 +9,12 @@ header, footer {
   z-index: 1;
 }
 
+#fast-forward:hover {
+  color: black;
+  border: 1px solid #888;
+  border-radius 3px;
+}
+
 header {
   /* height: 32px; */
   background: #38BC8F;
