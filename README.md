@@ -1,6 +1,6 @@
 # [OverClocked JukeBox](http://ocjb.pw)
 
-A no-fuss web player for [OC ReMixes](ocremix.org)
+A no-fuss web player for [OC ReMixes](http://ocremix.org)
 
 If you like game music and have never heard of OCR, you'll enjoy this.
 
