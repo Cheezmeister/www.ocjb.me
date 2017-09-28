@@ -30,12 +30,13 @@ const ID_SOURCE_GAME = 'source-game'
 const ID_SOURCE_SYSTEM = 'source-system'
 
 let trackCount = document.getElementsByClassName(CLASS_TRACK_DETAILS).length
-let nowPlaying = document.getElementById(ID_NOW_PLAYING)
-let fastForwardButton = document.getElementById(ID_FAST_FORWARD)
-let nowPlayingSpan = document.getElementById(ID_TRACK_TITLE)
-let trackArtistSpan = document.getElementById(ID_TRACK_ARTIST)
-let sourceGameSpan = document.getElementById(ID_SOURCE_GAME)
-let sourceSystemSpan = document.getElementById(ID_SOURCE_SYSTEM)
+const nowPlaying = document.getElementById(ID_NOW_PLAYING)
+const fastForwardButton = document.getElementById(ID_FAST_FORWARD)
+const nowPlayingSpan = document.getElementById(ID_TRACK_TITLE)
+const trackArtistSpan = document.getElementById(ID_TRACK_ARTIST)
+const sourceGameSpan = document.getElementById(ID_SOURCE_GAME)
+const sourceSystemSpan = document.getElementById(ID_SOURCE_SYSTEM)
+let currentTrackDetail;
 
 init()
 
@@ -88,17 +89,17 @@ function playTrack(trackDetail) {
     let source = document.createElement('source')
     source.src = sources.dataset[mirror]
     nowPlaying.appendChild(source)
+    nowPlaying.src = source.src
   }
   nowPlaying.play()
 
   updateHeader(trackDetail)
 
-  // TODO clear styles without this nonsense
-  let trackDetails = document.getElementsByClassName(CLASS_TRACK_DETAILS)
-  for (let el of trackDetails) {
-    el.attributes['class'].value = 'track row'
+  if (currentTrackDetail) {
+    currentTrackDetail.classList.remove('nowplaying')
   }
-  trackDetail.attributes['class'].value = 'track row nowplaying'
+  currentTrackDetail = trackDetail
+  trackDetail.classList.add('nowplaying')
 }
 
 function updateHeader(trackDetail) {
