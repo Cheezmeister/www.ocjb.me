@@ -83,12 +83,11 @@ function playTrack(trackDetail) {
   let trackNumber = trackDetail.dataset.number
   nowPlaying.pause()
   nowPlaying.innerHTML = ''
-  for (let mirror of ['aplus', 'blueblue', 'ocrmirror']) {
-    let link = document.getElementById(`dl-${mirror}-${trackNumber}`)
+  let sources = trackDetail.querySelector('.srcs')
+  for (let mirror of ['aplus', 'blu', 'ocrm']) {
     let source = document.createElement('source')
-    source.src = link.href
+    source.src = sources.dataset[mirror]
     nowPlaying.appendChild(source)
-    nowPlaying.src = link.href
   }
   nowPlaying.play()
 
