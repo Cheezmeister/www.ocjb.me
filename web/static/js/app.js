@@ -30,6 +30,7 @@ const ID_SOURCE_GAME = 'source-game'
 const ID_SOURCE_SYSTEM = 'source-system'
 
 let trackCount = document.getElementsByClassName(CLASS_TRACK_DETAILS).length
+const trackList = document.getElementsByClassName(CLASS_TRACK_DETAILS)
 const nowPlaying = document.getElementById(ID_NOW_PLAYING)
 const fastForwardButton = document.getElementById(ID_FAST_FORWARD)
 const nowPlayingSpan = document.getElementById(ID_TRACK_TITLE)
@@ -44,11 +45,9 @@ function init() {
   nowPlaying.onended = playRandomTrack
   fastForwardButton.onclick = playRandomTrack
   nowPlaying.muted = window.location.search === '?quiet'
-  document.addEventListener('keypress', playOrPause)
+  document.addEventListener('keypress', e => (e.key === ' ') && playOrPause(e))
 
-  let trackDetails = document.getElementsByClassName(CLASS_TRACK_DETAILS)
-  for (let idx = 0; idx < trackCount; idx++) {
-    let trackDetail = trackDetails[idx]
+  for (let trackDetail of trackList) {
     trackDetail.onclick = (e)=>trackClicked(trackDetail,e)
   }
 
@@ -64,10 +63,12 @@ function init() {
 
 
 function playOrPause(e) {
-  if (e.key === ' ') {
-    nowPlaying.paused ? nowPlaying.play() : nowPlaying.pause()
-    e.preventDefault()
-  }
+  nowPlaying.paused ? nowPlaying.play() : nowPlaying.pause()
+  e.preventDefault()
+}
+
+function trackClicked(trackDetail, event) {
+  playTrack(trackDetail)
 }
 
 function playRandomTrack() {
@@ -76,12 +77,7 @@ function playRandomTrack() {
   playTrack(trackDetail)
 }
 
-function trackClicked(trackDetail, event) {
-  playTrack(trackDetail)
-}
-
 function playTrack(trackDetail) {
-  let trackNumber = trackDetail.dataset.number
   nowPlaying.pause()
   nowPlaying.innerHTML = ''
   let sources = trackDetail.querySelector('.srcs')
@@ -93,21 +89,22 @@ function playTrack(trackDetail) {
   }
   nowPlaying.play()
 
-  updateHeader(trackDetail)
+  onNewTrackPlay(trackDetail)
+
+}
+
+function onNewTrackPlay(trackDetail) {
+  nowPlayingSpan.innerHTML = trackDetail.dataset.title
+  trackArtistSpan.innerHTML = trackDetail.dataset.artist
+  sourceGameSpan.innerHTML = trackDetail.dataset.game
+  sourceSystemSpan.innerHTML = trackDetail.dataset.system
+  document.title = formatTitle(trackDetail.dataset.title)
 
   if (currentTrackDetail) {
     currentTrackDetail.classList.remove('nowplaying')
   }
   currentTrackDetail = trackDetail
   trackDetail.classList.add('nowplaying')
-}
-
-function updateHeader(trackDetail) {
-  nowPlayingSpan.innerHTML = trackDetail.dataset.title
-  trackArtistSpan.innerHTML = trackDetail.dataset.artist
-  sourceGameSpan.innerHTML = trackDetail.dataset.game
-  sourceSystemSpan.innerHTML = trackDetail.dataset.system
-  document.title = formatTitle(trackDetail.dataset.title)
 }
 
 function formatTitle(trackTitle) {
