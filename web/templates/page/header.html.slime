@@ -8,6 +8,8 @@
           i#fast-forward.btn.fa.fa-forward.pull-right
     .col-sm-4
       span#track-title.large.ellipsize
+      a#find-anchor
+        i.fa.fa-crosshairs
       br
       span#track-artist.small
     .col-sm-4

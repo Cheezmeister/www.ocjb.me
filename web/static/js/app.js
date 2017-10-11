@@ -7,8 +7,8 @@ const ID_TRACK_TITLE = 'track-title'
 const ID_TRACK_ARTIST = 'track-artist'
 const ID_SOURCE_GAME = 'source-game'
 const ID_SOURCE_SYSTEM = 'source-system'
+const ID_FIND_ANCHOR = 'find-anchor'
 
-let trackCount = document.getElementsByClassName(CLASS_TRACK_DETAILS).length
 const trackList = document.getElementsByClassName(CLASS_TRACK_DETAILS)
 const nowPlaying = document.getElementById(ID_NOW_PLAYING)
 const fastForwardButton = document.getElementById(ID_FAST_FORWARD)
@@ -16,6 +16,9 @@ const nowPlayingSpan = document.getElementById(ID_TRACK_TITLE)
 const trackArtistSpan = document.getElementById(ID_TRACK_ARTIST)
 const sourceGameSpan = document.getElementById(ID_SOURCE_GAME)
 const sourceSystemSpan = document.getElementById(ID_SOURCE_SYSTEM)
+const zoomToTrackAnchor = document.getElementById(ID_FIND_ANCHOR)
+
+let trackCount = document.getElementsByClassName(CLASS_TRACK_DETAILS).length
 let currentTrackDetail;
 
 init()
@@ -73,6 +76,8 @@ function playTrack(trackDetail) {
 }
 
 function onNewTrackPlay(trackDetail) {
+
+  zoomToTrackAnchor.href = `#${trackDetail.id}`
   nowPlayingSpan.innerHTML = trackDetail.dataset.title
   trackArtistSpan.innerHTML = trackDetail.dataset.artist
   sourceGameSpan.innerHTML = trackDetail.dataset.game
