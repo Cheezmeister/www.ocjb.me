@@ -20,7 +20,7 @@ config :ocjb, Ocjb.Endpoint,
 config :logger, level: :info
 
 config :logger, :file,
-  path: "/var/log/www.#{url.host}.log"
+  path: "/var/log/www.ocjb.pw.log"
 
 # ## SSL Support
 #
