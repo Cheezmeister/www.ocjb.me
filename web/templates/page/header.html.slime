@@ -1,18 +1,17 @@
-.center-children
-  .row
-    .col-sm-4
-      .row.display-flex
-        .col-sm-9.center-children
-          audio#nowplaying.pull-left controls="controls" src=""
-        .col-sm-3.controls
-          i#fast-forward.btn.fa.fa-forward.pull-right
-    .col-sm-4
-      span#track-title.large.ellipsize
-      a#find-anchor
-        i.fa.fa-crosshairs
-      br
-      span#track-artist.small
-    .col-sm-4
-      span#source-game.large.ellipsize
-      br
-      span#source-system.small
+.row
+  .col-sm-4
+    .row.display-flex
+      .col-sm-9.center-children
+        audio#nowplaying.pull-left controls="controls" src=""
+      .col-sm-3.controls
+        i#fast-forward.btn.fa.fa-random.pull-right
+  .col-sm-4
+    span#track-title.large.ellipsize
+    a#find-anchor
+      i.fa.fa-crosshairs
+    br
+    span#track-artist.small
+  .col-sm-4
+    span#source-game.large.ellipsize
+    br
+    span#source-system.small

@@ -83,6 +83,7 @@ function onNewTrackPlay(trackDetail) {
   sourceGameSpan.innerHTML = trackDetail.dataset.game
   sourceSystemSpan.innerHTML = trackDetail.dataset.system
   document.title = formatTitle(trackDetail.dataset.title)
+  window.location.hash = `#${trackDetail.dataset.number}`
 
   if (currentTrackDetail) {
     currentTrackDetail.classList.remove('nowplaying')

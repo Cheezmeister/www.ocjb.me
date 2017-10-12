@@ -9,29 +9,20 @@
 div.track.row id="track-#{number}" data-title=title data-number=number data-artist=artist data-game=game data-system=system
   .srcs data-blu=blueblue_url(@track) data-aplus=aplus_url(@track) data-ocrm=ocrmirror_url(@track)
   .track-info.col-sm-4 name="trackinfo"
-    a href=ocr_url(@track)
-      h5.track-title.ellipsize =title
+    h5.track-title.ellipsize
+      a.ocr-link href=ocr_url(@track)
+        span aria-title="On OC ReMix"
+          img src='/images/ocremix.org.ico'
+      span =title
   .artist-info.col-sm-2
     a href=artist_page
-      h6.track-artist.ellipsize =artist
-  .game-info.col-sm-4 name="gameinfo"
+      h6.track-artist.ellipsize title=artist =artist
+  .game-info.col-sm-5 name="gameinfo"
     h6.game-title.ellipsize ="#{game} (#{system})"
-  .links.col-sm-2
-    /a href=ocr_url(@track)
-    /  span aria-title="On OC ReMix"
-    /    img src='/images/ocremix.org.ico'
+  .col-sm-1.links
+    a.permalink href=permalink(@track) style="float: right"
+      span aria-title="Share/Permalink this track"
+        i.fa.fa-link aria-hidden="true" alt="Share/Permalink this track" title="Share/Permalink this track"
     /a href="/tags/#{@track.basename}"
     /  span aria-title="Tags"
     /    i.fa.fa-tag aria-hidden="true" alt="Tags" title="View Tags"
-    /a.download.pull-right id="dl-blueblue-#{number}" href=blueblue_url(@track)
-    /  span aria-title="Download"
-    /    i.fa.fa-download aria-hidden="true" alt="DL" title="Download from BlueBlue.fr"
-    /a.download.pull-right id="dl-aplus-#{number}" href=aplus_url(@track)
-    /  span aria-title="Download"
-    /    i.fa.fa-download aria-hidden="true" alt="DL" title="Download from Aplus"
-    /a.download.pull-right id="dl-ocrmirror-#{number}" href=ocrmirror_url(@track)
-    /  span aria-title="Download"
-    /    i.fa.fa-download aria-hidden="true" alt="DL" title="Download from ocrmirror.org"
-    a.permalink.pull-righta href=permalink(@track)
-      span aria-title="Share/Permalink"
-        i.fa.fa-link aria-hidden="true" alt="Share/Permalink" title="Share/Permalink"

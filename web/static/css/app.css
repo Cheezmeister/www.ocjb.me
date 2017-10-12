@@ -39,34 +39,15 @@ a.github-corner svg {
   border: 1px solid gray;
   margin-bottom: -1px;
   background: #fff0de;
+  cursor: default;
 }
 
 .ellipsize {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-h6.ellipsize:hover {
-  overflow: visible;
-  white-space: normal;
-  width: auto;
-  position: absolute;
-  z-index: 9001;
-  background: white;
-  border: 1px solid #444;
-  border-radius: 4px;
-}
-
-.track-artist ::before {
-  content: ' byy ';
-}
-
-.source-system ::before {
-  content: ' oon';
-}
-
-.track-info {
+  margin-bottom: 0;
+  padding-bottom: 4px;
 }
 
 .track.nowplaying {
@@ -75,15 +56,6 @@ h6.ellipsize:hover {
 
 .track:hover {
   background: #ccccff;
-  cursor: pointer;
-}
-
-.links .download {
-  margin: 0 4px 0 4px;
-}
-
-.links a {
-  float: right;
 }
 
 a.download {
