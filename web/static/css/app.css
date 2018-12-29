@@ -16,7 +16,6 @@ header, footer {
 }
 
 header {
-  /* height: 32px; */
   background: #38BC8F;
   border-bottom: 1px solid gray;
 }
@@ -25,6 +24,13 @@ footer {
   border-top: 1px solid gray;
   bottom: 0;
   background: #25956F;
+}
+
+/* Hide GitHub corner on small screens */
+@media(max-width: 576px) {
+  a.github-corner {
+    display: none;
+  }
 }
 
 a.github-corner svg {

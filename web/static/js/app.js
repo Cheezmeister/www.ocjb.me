@@ -1,5 +1,3 @@
-import "phoenix_html"
-
 const CLASS_TRACK_DETAILS = 'track'
 const ID_NOW_PLAYING = 'nowplaying'
 const ID_FAST_FORWARD = 'fast-forward'
