@@ -14,7 +14,7 @@ A few of my favorites are:
 Click any track to play it. Download links are provided. If you download a lot, [donate back some bandwidth](http://ocremix.org/torrents) by using one of the torrents.
 ---
 
-# Powered by [![Phoenix](https://hexdocs.pm/phoenix/assets/logo.png)](http://www.phoenixframework.org/)
+# Powered by [![Phoenix](https://hexdocs.pm/phoenix/assets/logo.png) Phoenix](http://www.phoenixframework.org/)
 
 To start your Phoenix app:
 
