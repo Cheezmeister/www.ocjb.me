@@ -1,5 +1,4 @@
-# [OverClocked JukeBox](http://ocjb.pw)
-[![Build Status](https://travis-ci.org/Cheezmeister/www.ocjb.me.svg?branch=master)](https://travis-ci.org/Cheezmeister/www.ocjb.me)
+# [OverClocked JukeBox](http://ocjb.pw) [![Build Status](https://travis-ci.org/Cheezmeister/www.ocjb.me.svg?branch=master)](https://travis-ci.org/Cheezmeister/www.ocjb.me)
 
 A no-fuss web player for [OC ReMixes](http://ocremix.org)
 
