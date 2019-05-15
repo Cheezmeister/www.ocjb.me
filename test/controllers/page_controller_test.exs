@@ -3,7 +3,7 @@ defmodule Ocjb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"
-    assert html_response(conn, 200) =~ "Shuffling "
+    assert html_response(conn, 200) =~ "Made with <3"
   end
 
 end
