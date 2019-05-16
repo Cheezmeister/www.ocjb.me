@@ -3,7 +3,7 @@ defmodule Ocjb.Indexer do
   require Logger
 
   use GenServer
-  
+ 
   @trackglob "*.mp3"
   @batchsize 50
   @interval_seconds 2
@@ -33,13 +33,13 @@ defmodule Ocjb.Indexer do
 
   def prep_tracklist({seen, tracklist}) do
     folder = Application.get_env(:ocjb, Ocjb.Endpoint)[:music_dir]
-    files = list(folder) 
+    files = list(folder)
       |> Enum.filter(fn f -> !(seen[f]) end)
       |> Enum.take(@batchsize)
     Logger.info "Indexing #{files |> Enum.count} tracks..."
     seen = files |> Enum.zip(files |> Enum.map(fn(_)->true end)) |> Enum.into(%{}) |> Map.merge(seen)
     tracklist = files
-      |> Enum.map(&prep_single_track/1) 
+      |> Enum.map(&prep_single_track/1)
       |> Enum.concat(tracklist)
     {seen, tracklist}
   end
