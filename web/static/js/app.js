@@ -19,13 +19,18 @@ const zoomToTrackAnchor = document.getElementById(ID_FIND_ANCHOR)
 let trackCount = document.getElementsByClassName(CLASS_TRACK_DETAILS).length
 let currentTrackDetail;
 
+const keyPressHandlers = {
+  ' ': playOrPause,
+  'n': playRandomTrack,
+};
+
 init()
 
 function init() {
   nowPlaying.onended = playRandomTrack
   fastForwardButton.onclick = playRandomTrack
   nowPlaying.muted = window.location.search === '?quiet'
-  document.addEventListener('keypress', e => (e.key === ' ') && playOrPause(e))
+  document.addEventListener('keypress', onKeyPress)
 
   for (let trackDetail of trackList) {
     trackDetail.onclick = (e)=>trackClicked(trackDetail,e)
@@ -41,10 +46,13 @@ function init() {
   playRandomTrack()
 }
 
+function onKeyPress(event) {
+  const handler = keyPressHandlers[event.key]
+  handler && handler(event) && event.preventDefault()
+}
 
 function playOrPause(e) {
   nowPlaying.paused ? nowPlaying.play() : nowPlaying.pause()
-  e.preventDefault()
 }
 
 function trackClicked(trackDetail, event) {
