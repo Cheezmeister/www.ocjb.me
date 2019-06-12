@@ -33,6 +33,7 @@ defmodule Ocjb.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_slime, "~> 0.12.0"},
      {:phoenix_live_reload, "~> 1.1.1", only: :dev},
+     {:jason, "~> 1.0"},
      {:gettext, "~> 0.13"},
      {:plug_cowboy, "~> 2.0"},
      {:appsignal, "~> 1.0"},

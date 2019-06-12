@@ -15,6 +15,7 @@ config :ocjb, Ocjb.Endpoint,
   music_dir: System.get_env("MUSIC_DIR"),
   instrumenters: [Appsignal.Phoenix.Instrumenter]
 
+config :phoenix, :json_library, Jason
 config :phoenix, :template_engines,
   slim: PhoenixSlime.Engine,
   slime: PhoenixSlime.Engine
