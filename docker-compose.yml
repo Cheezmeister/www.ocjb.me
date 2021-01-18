@@ -5,12 +5,14 @@ services:
     working_dir: /code
     volumes:
       - .:/code
+    ports:
+      - "4000:4000"
     command: >
       mix do local.hex --force,
              local.rebar --force,
              deps.get,
              compile,
-             app.start
+             phx.server
 
 volumes:
   code:
