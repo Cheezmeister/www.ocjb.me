@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  web:
+    build: .
+    working_dir: /code
+    volumes:
+      - .:/code
+    command: >
+      mix do local.hex --force,
+             local.rebar --force,
+             deps.get,
+             compile,
+             app.start
+
+volumes:
+  code:
