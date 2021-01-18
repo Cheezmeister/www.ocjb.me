@@ -12,8 +12,7 @@ config :ocjb, Ocjb.Endpoint,
   render_errors: [view: Ocjb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Ocjb.PubSub,
            adapter: Phoenix.PubSub.PG2],
-  music_dir: System.get_env("MUSIC_DIR"),
-  instrumenters: [Appsignal.Phoenix.Instrumenter]
+  music_dir: System.get_env("MUSIC_DIR")
 
 config :phoenix, :json_library, Jason
 config :phoenix, :template_engines,
@@ -29,4 +28,3 @@ config :logger, :console,
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
 
-import_config "appsignal.exs"
