@@ -6,4 +6,4 @@ ENV MIX_HOME=/root/.mix
 # https://docs.appsignal.com/support/operating-systems.html#musl-build-override
 ENV APPSIGNAL_BUILD_FOR_MUSL=1
 
-RUN apk add --update alpine-sdk coreutils
+RUN apk add --update alpine-sdk coreutils npm

@@ -13,14 +13,14 @@ use Mix.Config
 # which you typically run after static files are built.
 config :ocjb, Ocjb.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "ocjb.pw", port: 80],
-  cache_static_manifest: "priv/static/manifest.json"
+  url: [host: "ocjb.me", port: 80],
+  cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info
 
 config :logger, :file,
-  path: "/var/log/www.ocjb.pw.log"
+  path: "/var/log/www.ocjb.me.log"
 
 # ## SSL Support
 #
