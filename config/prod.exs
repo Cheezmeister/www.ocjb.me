@@ -14,6 +14,12 @@ use Mix.Config
 config :ocjb, Ocjb.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [host: "ocjb.me", port: 80],
+  force_ssl: [hsts: true],
+  https: [ port: 443 , 
+           otp_app: :ocjb , 
+           keyfile: "/letsencrypt/live/ocjb.me-0001/privkey.pem" , 
+           cacertfile: "/letsencrypt/live/ocjb.me-0001/fullchain.pem" , 
+           certfile: "/letsencrypt/live/ocjb.me-0001/fullchain.pem" ],  
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
